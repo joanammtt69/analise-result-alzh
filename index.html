@@ -1,301 +1,102 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <title>Análise em Progresso</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600&display=swap" rel="stylesheet" />
-  <style>
-    /* Reset e box-sizing */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<!-- Seção de Análise - Código Separado -->
+<div id="quiz-container" style="max-width:480px; margin: 20px auto; background: rgba(255,255,255,0.95); border-radius:12px; padding:16px; box-shadow:0 6px 20px rgba(0,0,0,0.1); font-family:'Rubik',sans-serif;">
+  <h1 style="text-align:center; font-size:1.3rem; font-weight:700; color:#222; line-height:1.3;">
+    Calculando resultados e criando seu relatório personalizado 
+    <span class="dots"><span>.</span><span>.</span><span>.</span></span>
+  </h1>
 
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      overflow: hidden; /* remove scroll interno (preserva seu layout iframe) */
-      font-family: 'Rubik', sans-serif;
-      background: transparent;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start; /* container no topo */
-    }
-
-    #quiz-container {
-      width: 100%;
-      max-width: 480px;
-      background: rgba(255, 255, 255, 0.95); /* branco quase transparente */
-      border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-      margin-top: 10px;
-      padding: 16px;
-    }
-
-    h1 {
-      font-size: 1.3rem;
-      font-weight: 700;
-      text-align: center;
-      line-height: 1.3;
-      color: #222;
-    }
-
-    .dots span {
-      animation: blink 1s infinite;
-      margin-left: 2px;
-      font-weight: 700;
-      font-size: 1.5rem;
-      line-height: 1;
-      color: #f2c94c;
-    }
-    .dots span:nth-child(2) { animation-delay: 0.2s; }
-    .dots span:nth-child(3) { animation-delay: 0.4s; }
-
-    @keyframes blink {
-      0%,20%,100% { opacity: 0; }
-      50% { opacity: 1; }
-    }
-
-    /* Progress bars */
-    .progress-container { margin-top: 20px; }
-    .progress-step { margin-bottom: 20px; }
-    .progress-step p {
-      display: flex;
-      justify-content: space-between;
-      font-weight: 500;
-      font-size: 0.9rem;
-      margin-bottom: 6px;
-      color: #555;
-    }
-
-    progress {
-      width: 100%;
-      height: 12px;
-      -webkit-appearance: none;
-      appearance: none;
-      border-radius: 10px;
-      background-color: #e0e0e0;
-      overflow: hidden;
-    }
-
-    progress::-webkit-progress-bar { background-color: #e0e0e0; border-radius: 10px; }
-    progress::-webkit-progress-value {
-      background: linear-gradient(90deg, #f2c94c, #f2994a);
-      border-radius: 10px;
-      transition: width 0.3s ease;
-    }
-    progress::-moz-progress-bar {
-      background: linear-gradient(90deg, #f2c94c, #f2994a);
-      border-radius: 10px;
-      transition: width 0.3s ease;
-    }
-
-    /* ===== Comentários estilo Facebook ===== */
-    .fb-comentarios {
-      margin-top: 24px;
-      background: #fff;
-      border-radius: 12px;
-      padding: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-      font-size: 0.95rem;
-    }
-
-    .fb-box-comentario {
-      display: flex;
-      align-items: flex-start;
-      margin-bottom: 16px;
-      position: relative;
-      padding-bottom: 8px;
-    }
-
-    .fb-box-comentario img {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      margin-right: 10px;
-      flex-shrink: 0;
-      object-fit: cover;
-      background: #ddd;
-    }
-
-    .fb-conteudo {
-      flex: 1;
-    }
-
-    .fb-nome {
-      font-weight: 600;
-      color: #385898; /* azul FB */
-      margin-bottom: 6px;
-    }
-
-    .fb-texto {
-      background: #f0f2f5;
-      padding: 10px 14px;
-      border-radius: 14px;
-      line-height: 1.45;
-      color: #222;
-    }
-
-    .fb-acoes {
-      font-size: 0.78rem;
-      color: #65676b;
-      margin-top: 8px;
-    }
-
-    .fb-curtidas {
-      position: absolute;
-      bottom: 6px;
-      right: 12px;
-      font-size: 0.75rem;
-      background: #fff;
-      padding: 4px 8px;
-      border-radius: 12px;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.06);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .fb-curtidas img {
-      width: 16px;
-      height: 16px;
-    }
-
-    .fb-plugin {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.82rem;
-      color: #555;
-      margin-top: 12px;
-      padding-top: 10px;
-      border-top: 1px solid #eee;
-    }
-
-    .fb-plugin img {
-      width: 18px;
-      margin-right: 8px;
-    }
-
-    /* Responsividade */
-    @media (max-width: 420px) {
-      h1 { font-size: 1.1rem; }
-      .progress-step p { font-size: 0.85rem; }
-      progress { height: 10px; }
-      .fb-texto { font-size: 0.92rem; padding: 8px 12px; }
-      .fb-acoes { font-size: 0.72rem; }
-      .fb-curtidas { font-size: 0.7rem; padding: 3px 6px; }
-    }
-  </style>
-</head>
-<body>
-  <div id="quiz-container">
-    <h1>Calculando resultados e criando seu relatório personalizado 
-      <span class="dots"><span>.</span><span>.</span><span>.</span></span>
-    </h1>
-
-    <div class="progress-container">
-      <div class="progress-step">
-        <p><span>Analisando seus padrões e respostas</span><span id="label1">0%</span></p>
-        <progress id="bar1" value="0" max="100"></progress>
-      </div>
-      <div class="progress-step">
-        <p><span>Análise de Crescimento e Evolução</span><span id="label2">0%</span></p>
-        <progress id="bar2" value="0" max="100"></progress>
-      </div>
-      <div class="progress-step">
-        <p><span>Inspeção de Dinâmica de Interação</span><span id="label3">0%</span></p>
-        <progress id="bar3" value="0" max="100"></progress>
-      </div>
-      <div class="progress-step">
-        <p><span>Decodificando seus comportamentos e tendências</span><span id="label4">0%</span></p>
-        <progress id="bar4" value="0" max="100"></progress>
-      </div>
+  <div class="progress-container" style="margin-top:20px;">
+    <div class="progress-step" style="margin-bottom:20px;">
+      <p style="display:flex; justify-content:space-between; font-weight:500; font-size:0.9rem; margin-bottom:6px; color:#555;">
+        <span>Analisando seus padrões e respostas</span><span id="label1">0%</span>
+      </p>
+      <progress id="bar1" value="0" max="100" style="width:100%; height:12px; border-radius:10px; appearance:none; background-color:#e0e0e0;"></progress>
     </div>
 
-    <!-- Bloco de comentários estilo Facebook (usando os textos originais) -->
-    <div class="fb-comentarios">
-      <!-- Comentário 1 -->
-      <div class="fb-box-comentario">
-        <img src="https://protocolocriancanovamente.com.br/wp-content/uploads/2025/07/perfil-sem-foto.webp" alt="ana_paula">
-        <div class="fb-conteudo">
-          <p class="fb-nome">Ana Paula</p>
-          <div class="fb-texto">
-            Minha mãe começou a fazer os exercícios e em poucas semanas já percebi que ela lembrava melhor das conversas do dia a dia. Está mais ativa e sorridente.
-          </div>
-          <div class="fb-acoes">Curtir · Responder · 2h</div>
-        </div>
-        <div class="fb-curtidas">👍 18</div>
-      </div>
-
-      <!-- Comentário 2 -->
-      <div class="fb-box-comentario">
-        <img src="https://protocolocriancanovamente.com.br/wp-content/uploads/2025/07/perfil-sem-foto.webp" alt="jose_carlos">
-        <div class="fb-conteudo">
-          <p class="fb-nome">José Carlos</p>
-          <div class="fb-texto">
-            Eu tinha medo de perder minha memória, mas agora sinto que estou mais confiante. Os exercícios são simples e até divertidos!
-          </div>
-          <div class="fb-acoes">Curtir · Responder · 4h</div>
-        </div>
-        <div class="fb-curtidas">👍 22</div>
-      </div>
-
-      <!-- Comentário 3 -->
-      <div class="fb-box-comentario">
-        <img src="https://protocolocriancanovamente.com.br/wp-content/uploads/2025/07/perfil-sem-foto.webp" alt="fernanda">
-        <div class="fb-conteudo">
-          <p class="fb-nome">Fernanda</p>
-          <div class="fb-texto">
-            Achei que meu pai não fosse se adaptar, mas ele adora os desafios. Virou uma rotina que fortaleceu até nosso vínculo familiar.
-          </div>
-          <div class="fb-acoes">Curtir · Responder · 6h</div>
-        </div>
-        <div class="fb-curtidas">👍 30</div>
-      </div>
-
-      <!-- Plugin Facebook -->
-      <div class="fb-plugin">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%282019%29.png" alt="Facebook">
-        <span>Plug-in oficial do Facebook</span>
-      </div>
+    <div class="progress-step" style="margin-bottom:20px;">
+      <p style="display:flex; justify-content:space-between; font-weight:500; font-size:0.9rem; margin-bottom:6px; color:#555;">
+        <span>Análise de Crescimento e Evolução</span><span id="label2">0%</span>
+      </p>
+      <progress id="bar2" value="0" max="100" style="width:100%; height:12px; border-radius:10px; appearance:none; background-color:#e0e0e0;"></progress>
     </div>
-    <!-- FIM comentários -->
+
+    <div class="progress-step" style="margin-bottom:20px;">
+      <p style="display:flex; justify-content:space-between; font-weight:500; font-size:0.9rem; margin-bottom:6px; color:#555;">
+        <span>Inspeção de Dinâmica de Interação</span><span id="label3">0%</span>
+      </p>
+      <progress id="bar3" value="0" max="100" style="width:100%; height:12px; border-radius:10px; appearance:none; background-color:#e0e0e0;"></progress>
+    </div>
+
+    <div class="progress-step">
+      <p style="display:flex; justify-content:space-between; font-weight:500; font-size:0.9rem; margin-bottom:6px; color:#555;">
+        <span>Decodificando seus comportamentos e tendências</span><span id="label4">0%</span>
+      </p>
+      <progress id="bar4" value="0" max="100" style="width:100%; height:12px; border-radius:10px; appearance:none; background-color:#e0e0e0;"></progress>
+    </div>
   </div>
+</div>
 
-  <script>
-    // Animação sequencial das barras (mesma lógica do seu código original)
-    const steps = [
-      { id: 'bar1', label: 'label1' },
-      { id: 'bar2', label: 'label2' },
-      { id: 'bar3', label: 'label3' },
-      { id: 'bar4', label: 'label4' }
-    ];
+<!-- Estilos da animação de pontos -->
+<style>
+.dots span {
+  animation: blink 1s infinite;
+  margin-left: 2px;
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: #f2c94c;
+}
+.dots span:nth-child(2) { animation-delay: 0.2s; }
+.dots span:nth-child(3) { animation-delay: 0.4s; }
 
-    let current = 0;
+@keyframes blink {
+  0%,20%,100% { opacity: 0; }
+  50% { opacity: 1; }
+}
 
-    function animateStep() {
-      if (current >= steps.length) return;
-      const step = steps[current];
-      const bar = document.getElementById(step.id);
-      const label = document.getElementById(step.label);
-      let value = 0;
+progress::-webkit-progress-bar { background-color:#e0e0e0; border-radius:10px; }
+progress::-webkit-progress-value { 
+  background: linear-gradient(90deg, #f2c94c, #f2994a);
+  border-radius:10px;
+  transition: width 0.3s ease;
+}
+progress::-moz-progress-bar {
+  background: linear-gradient(90deg, #f2c94c, #f2994a);
+  border-radius:10px;
+  transition: width 0.3s ease;
+}
+</style>
 
-      const interval = setInterval(() => {
-        value++;
-        bar.value = value;
-        label.textContent = value + '%';
+<!-- Script de animação das barras -->
+<script>
+const steps = [
+  { id: 'bar1', label: 'label1' },
+  { id: 'bar2', label: 'label2' },
+  { id: 'bar3', label: 'label3' },
+  { id: 'bar4', label: 'label4' }
+];
 
-        if (value >= 100) {
-          clearInterval(interval);
-          current++;
-          // pequena pausa antes do próximo para parecer mais natural
-          setTimeout(animateStep, 250);
-        }
-      }, 70);
+let current = 0;
+
+function animateStep() {
+  if(current >= steps.length) return;
+  const step = steps[current];
+  const bar = document.getElementById(step.id);
+  const label = document.getElementById(step.label);
+  let value = 0;
+
+  const interval = setInterval(() => {
+    value++;
+    bar.value = value;
+    label.textContent = value + '%';
+
+    if(value >= 100) {
+      clearInterval(interval);
+      current++;
+      setTimeout(animateStep, 250); // pequena pausa
     }
+  }, 70);
+}
 
-    // inicia animação quando a página carregar
-    window.addEventListener('load', animateStep);
-  </script>
-</body>
-</html>
+window.addEventListener('load', animateStep);
+</script>
