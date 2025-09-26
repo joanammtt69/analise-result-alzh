@@ -10,19 +10,21 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden; /* remove scroll interno */
       font-family: 'Rubik', sans-serif;
-      background: transparent; /* fundo transparente */
+      background: transparent;
       display: flex;
       justify-content: center;
       align-items: flex-start; /* container no topo */
-      min-height: 100vh;
-      padding: 0;
     }
 
     #quiz-container {
       width: 100%;
       max-width: 480px;
-      background: rgba(255, 255, 255, 0.95); /* branco quase transparente para destaque */
+      background: rgba(255, 255, 255, 0.95); /* branco quase transparente */
       border-radius: 12px;
       box-shadow: 0 6px 20px rgba(0,0,0,0.1);
       margin-top: 10px; 
@@ -89,7 +91,7 @@
     /* Depoimentos */
     .testimonials { margin-top: 30px; }
     .testimonial {
-      background: rgba(255, 247, 230, 0.95); /* quase transparente */
+      background: rgba(255, 247, 230, 0.95);
       border-left: 4px solid #f2c94c;
       padding: 12px;
       margin-bottom: 12px;
@@ -117,7 +119,6 @@
   </style>
 </head>
 <body>
-
   <div id="quiz-container">
     <h1>Calculando resultados e criando seu relatório personalizado 
       <span class="dots"><span>.</span><span>.</span><span>.</span></span>
