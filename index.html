@@ -88,33 +88,73 @@
       transition: width 0.3s ease;
     }
 
-    /* Depoimentos */
-    .testimonials { margin-top: 30px; }
-    .testimonial {
-      background: rgba(255, 247, 230, 0.95);
-      border-left: 4px solid #f2c94c;
+    /* Instagram style comments */
+    .ig-comentarios {
+      margin-top: 25px;
+      background: #fff;
+      border-radius: 12px;
       padding: 12px;
-      margin-bottom: 12px;
-      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
       font-size: 0.9rem;
-      color: #444;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
-      transition: transform 0.2s;
-    }
-    .testimonial:hover { transform: translateY(-2px); }
-    .testimonial strong {
-      display: block;
-      margin-top: 6px;
-      font-weight: 600;
-      color: #222;
     }
 
-    /* Responsividade */
+    .ig-box-comentario {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 14px;
+    }
+
+    .ig-box-comentario img {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      margin-right: 10px;
+      flex-shrink: 0;
+    }
+
+    .ig-texto p {
+      margin-bottom: 4px;
+      line-height: 1.3;
+    }
+
+    .ig-texto strong {
+      font-weight: 600;
+      margin-right: 6px;
+    }
+
+    .ig-tempo {
+      color: #999;
+      font-size: 0.75rem;
+    }
+
+    .ig-reacoes {
+      font-size: 0.75rem;
+      color: #666;
+      margin-top: 2px;
+    }
+
+    .ig-plugin {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      color: #555;
+      margin-top: 15px;
+      padding-top: 10px;
+      border-top: 1px solid #eee;
+    }
+
+    .ig-plugin img {
+      width: 18px;
+      margin-right: 6px;
+    }
+
     @media (max-width: 400px) {
       h1 { font-size: 1.1rem; }
       .progress-step p { font-size: 0.85rem; }
-      .testimonial { font-size: 0.85rem; padding: 10px; }
       progress { height: 10px; }
+      .ig-texto { font-size: 0.85rem; }
+      .ig-reacoes, .ig-tempo { font-size: 0.7rem; }
     }
   </style>
 </head>
@@ -143,18 +183,42 @@
       </div>
     </div>
 
-    <div class="testimonials">
-      <div class="testimonial">
-        “Minha mãe começou a fazer os exercícios e em poucas semanas já percebi que ela lembrava melhor das conversas do dia a dia. Está mais ativa e sorridente.”  
-        <strong>— Ana Paula, 42 anos</strong>
+    <!-- Bloco de comentários estilo Instagram -->
+    <div class="ig-comentarios">
+      <!-- Comentário 1 -->
+      <div class="ig-box-comentario">
+        <img src="https://protocolocriancanovamente.com.br/wp-content/uploads/2025/07/perfil-sem-foto.webp" alt="ana_paula">
+        <div class="ig-texto">
+          <p><strong>ana.paula42</strong> <span class="ig-tempo">2h</span></p>
+          <p>Minha mãe começou a fazer os exercícios e em poucas semanas já percebi que ela lembrava melhor das conversas do dia a dia. Está mais ativa e sorridente.</p>
+          <div class="ig-reacoes">18 curtidas · Responder</div>
+        </div>
       </div>
-      <div class="testimonial">
-        “Eu tinha medo de perder minha memória, mas agora sinto que estou mais confiante. Os exercícios são simples e até divertidos!”  
-        <strong>— José Carlos, 67 anos</strong>
+
+      <!-- Comentário 2 -->
+      <div class="ig-box-comentario">
+        <img src="https://protocolocriancanovamente.com.br/wp-content/uploads/2025/07/perfil-sem-foto.webp" alt="jose_carlos">
+        <div class="ig-texto">
+          <p><strong>josecarlos67</strong> <span class="ig-tempo">4h</span></p>
+          <p>Eu tinha medo de perder minha memória, mas agora sinto que estou mais confiante. Os exercícios são simples e até divertidos!</p>
+          <div class="ig-reacoes">22 curtidas · Responder</div>
+        </div>
       </div>
-      <div class="testimonial">
-        “Achei que meu pai não fosse se adaptar, mas ele adora os desafios. Virou uma rotina que fortaleceu até nosso vínculo familiar.”  
-        <strong>— Fernanda, 35 anos</strong>
+
+      <!-- Comentário 3 -->
+      <div class="ig-box-comentario">
+        <img src="https://protocolocriancanovamente.com.br/wp-content/uploads/2025/07/perfil-sem-foto.webp" alt="fernanda">
+        <div class="ig-texto">
+          <p><strong>fernandinha_35</strong> <span class="ig-tempo">6h</span></p>
+          <p>Achei que meu pai não fosse se adaptar, mas ele adora os desafios. Virou uma rotina que fortaleceu até nosso vínculo familiar.</p>
+          <div class="ig-reacoes">30 curtidas · Responder</div>
+        </div>
+      </div>
+
+      <!-- Plugin Instagram -->
+      <div class="ig-plugin">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/48px-Instagram_icon.png" alt="Instagram">
+        <span>Plug-in oficial do Instagram</span>
       </div>
     </div>
   </div>
