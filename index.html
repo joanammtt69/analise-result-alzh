@@ -13,7 +13,7 @@
       height: 100%;
       margin: 0;
       padding: 0;
-      overflow: hidden; /* remove scroll interno */
+      overflow: hidden; /* remove scroll interno (preserva seu layout iframe) */
       font-family: 'Rubik', sans-serif;
       background: transparent;
       display: flex;
@@ -27,7 +27,7 @@
       background: rgba(255, 255, 255, 0.95); /* branco quase transparente */
       border-radius: 12px;
       box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-      margin-top: 10px; 
+      margin-top: 10px;
       padding: 16px;
     }
 
@@ -70,6 +70,7 @@
     progress {
       width: 100%;
       height: 12px;
+      -webkit-appearance: none;
       appearance: none;
       border-radius: 10px;
       background-color: #e0e0e0;
@@ -88,73 +89,101 @@
       transition: width 0.3s ease;
     }
 
-    /* Instagram style comments */
-    .ig-comentarios {
-      margin-top: 25px;
+    /* ===== Comentários estilo Facebook ===== */
+    .fb-comentarios {
+      margin-top: 24px;
       background: #fff;
       border-radius: 12px;
       padding: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-      font-size: 0.9rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      font-size: 0.95rem;
     }
 
-    .ig-box-comentario {
+    .fb-box-comentario {
       display: flex;
       align-items: flex-start;
-      margin-bottom: 14px;
+      margin-bottom: 16px;
+      position: relative;
+      padding-bottom: 8px;
     }
 
-    .ig-box-comentario img {
-      width: 36px;
-      height: 36px;
+    .fb-box-comentario img {
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
       margin-right: 10px;
       flex-shrink: 0;
+      object-fit: cover;
+      background: #ddd;
     }
 
-    .ig-texto p {
-      margin-bottom: 4px;
-      line-height: 1.3;
+    .fb-conteudo {
+      flex: 1;
     }
 
-    .ig-texto strong {
+    .fb-nome {
       font-weight: 600;
-      margin-right: 6px;
+      color: #385898; /* azul FB */
+      margin-bottom: 6px;
     }
 
-    .ig-tempo {
-      color: #999;
+    .fb-texto {
+      background: #f0f2f5;
+      padding: 10px 14px;
+      border-radius: 14px;
+      line-height: 1.45;
+      color: #222;
+    }
+
+    .fb-acoes {
+      font-size: 0.78rem;
+      color: #65676b;
+      margin-top: 8px;
+    }
+
+    .fb-curtidas {
+      position: absolute;
+      bottom: 6px;
+      right: 12px;
       font-size: 0.75rem;
+      background: #fff;
+      padding: 4px 8px;
+      border-radius: 12px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
 
-    .ig-reacoes {
-      font-size: 0.75rem;
-      color: #666;
-      margin-top: 2px;
+    .fb-curtidas img {
+      width: 16px;
+      height: 16px;
     }
 
-    .ig-plugin {
+    .fb-plugin {
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       color: #555;
-      margin-top: 15px;
+      margin-top: 12px;
       padding-top: 10px;
       border-top: 1px solid #eee;
     }
 
-    .ig-plugin img {
+    .fb-plugin img {
       width: 18px;
-      margin-right: 6px;
+      margin-right: 8px;
     }
 
-    @media (max-width: 400px) {
+    /* Responsividade */
+    @media (max-width: 420px) {
       h1 { font-size: 1.1rem; }
       .progress-step p { font-size: 0.85rem; }
       progress { height: 10px; }
-      .ig-texto { font-size: 0.85rem; }
-      .ig-reacoes, .ig-tempo { font-size: 0.7rem; }
+      .fb-texto { font-size: 0.92rem; padding: 8px 12px; }
+      .fb-acoes { font-size: 0.72rem; }
+      .fb-curtidas { font-size: 0.7rem; padding: 3px 6px; }
     }
   </style>
 </head>
@@ -183,47 +212,58 @@
       </div>
     </div>
 
-    <!-- Bloco de comentários estilo Instagram -->
-    <div class="ig-comentarios">
+    <!-- Bloco de comentários estilo Facebook (usando os textos originais) -->
+    <div class="fb-comentarios">
       <!-- Comentário 1 -->
-      <div class="ig-box-comentario">
+      <div class="fb-box-comentario">
         <img src="https://protocolocriancanovamente.com.br/wp-content/uploads/2025/07/perfil-sem-foto.webp" alt="ana_paula">
-        <div class="ig-texto">
-          <p><strong>ana.paula42</strong> <span class="ig-tempo">2h</span></p>
-          <p>Minha mãe começou a fazer os exercícios e em poucas semanas já percebi que ela lembrava melhor das conversas do dia a dia. Está mais ativa e sorridente.</p>
-          <div class="ig-reacoes">18 curtidas · Responder</div>
+        <div class="fb-conteudo">
+          <p class="fb-nome">Ana Paula</p>
+          <div class="fb-texto">
+            Minha mãe começou a fazer os exercícios e em poucas semanas já percebi que ela lembrava melhor das conversas do dia a dia. Está mais ativa e sorridente.
+          </div>
+          <div class="fb-acoes">Curtir · Responder · 2h</div>
         </div>
+        <div class="fb-curtidas">👍 18</div>
       </div>
 
       <!-- Comentário 2 -->
-      <div class="ig-box-comentario">
+      <div class="fb-box-comentario">
         <img src="https://protocolocriancanovamente.com.br/wp-content/uploads/2025/07/perfil-sem-foto.webp" alt="jose_carlos">
-        <div class="ig-texto">
-          <p><strong>josecarlos67</strong> <span class="ig-tempo">4h</span></p>
-          <p>Eu tinha medo de perder minha memória, mas agora sinto que estou mais confiante. Os exercícios são simples e até divertidos!</p>
-          <div class="ig-reacoes">22 curtidas · Responder</div>
+        <div class="fb-conteudo">
+          <p class="fb-nome">José Carlos</p>
+          <div class="fb-texto">
+            Eu tinha medo de perder minha memória, mas agora sinto que estou mais confiante. Os exercícios são simples e até divertidos!
+          </div>
+          <div class="fb-acoes">Curtir · Responder · 4h</div>
         </div>
+        <div class="fb-curtidas">👍 22</div>
       </div>
 
       <!-- Comentário 3 -->
-      <div class="ig-box-comentario">
+      <div class="fb-box-comentario">
         <img src="https://protocolocriancanovamente.com.br/wp-content/uploads/2025/07/perfil-sem-foto.webp" alt="fernanda">
-        <div class="ig-texto">
-          <p><strong>fernandinha_35</strong> <span class="ig-tempo">6h</span></p>
-          <p>Achei que meu pai não fosse se adaptar, mas ele adora os desafios. Virou uma rotina que fortaleceu até nosso vínculo familiar.</p>
-          <div class="ig-reacoes">30 curtidas · Responder</div>
+        <div class="fb-conteudo">
+          <p class="fb-nome">Fernanda</p>
+          <div class="fb-texto">
+            Achei que meu pai não fosse se adaptar, mas ele adora os desafios. Virou uma rotina que fortaleceu até nosso vínculo familiar.
+          </div>
+          <div class="fb-acoes">Curtir · Responder · 6h</div>
         </div>
+        <div class="fb-curtidas">👍 30</div>
       </div>
 
-      <!-- Plugin Instagram -->
-      <div class="ig-plugin">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/48px-Instagram_icon.png" alt="Instagram">
-        <span>Plug-in oficial do Instagram</span>
+      <!-- Plugin Facebook -->
+      <div class="fb-plugin">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%282019%29.png" alt="Facebook">
+        <span>Plug-in oficial do Facebook</span>
       </div>
     </div>
+    <!-- FIM comentários -->
   </div>
 
   <script>
+    // Animação sequencial das barras (mesma lógica do seu código original)
     const steps = [
       { id: 'bar1', label: 'label1' },
       { id: 'bar2', label: 'label2' },
@@ -248,12 +288,14 @@
         if (value >= 100) {
           clearInterval(interval);
           current++;
-          animateStep();
+          // pequena pausa antes do próximo para parecer mais natural
+          setTimeout(animateStep, 250);
         }
       }, 70);
     }
 
-    animateStep();
+    // inicia animação quando a página carregar
+    window.addEventListener('load', animateStep);
   </script>
 </body>
 </html>
