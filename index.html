@@ -6,94 +6,80 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
-    /* Reset e Box-sizing */
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    /* Reset e box-sizing */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     html, body {
       font-family: 'Rubik', sans-serif;
-      background: #f7f7f7;
+      background: transparent; /* fundo transparente */
       display: flex;
       justify-content: center;
-      align-items: flex-start;
+      align-items: flex-start; /* container no topo */
       min-height: 100vh;
-      padding: 20px 0;
+      padding: 0;
     }
 
     #quiz-container {
       width: 100%;
       max-width: 480px;
-      padding: 20px;
-      background: #fff;
+      background: rgba(255, 255, 255, 0.95); /* branco quase transparente para destaque */
       border-radius: 12px;
       box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      margin-top: 10px; 
+      padding: 16px;
     }
 
     h1 {
-      font-size: 1.4rem;
+      font-size: 1.3rem;
       font-weight: 700;
       text-align: center;
-      line-height: 1.4;
+      line-height: 1.3;
       color: #222;
     }
 
     .dots span {
       animation: blink 1s infinite;
-      margin-left: 3px;
+      margin-left: 2px;
       font-weight: 700;
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       line-height: 1;
       color: #f2c94c;
     }
-
     .dots span:nth-child(2) { animation-delay: 0.2s; }
     .dots span:nth-child(3) { animation-delay: 0.4s; }
 
     @keyframes blink {
-      0%, 20%, 100% { opacity: 0; }
+      0%,20%,100% { opacity: 0; }
       50% { opacity: 1; }
     }
 
-    .progress-container {
-      margin-top: 30px;
-    }
-
-    .progress-step {
-      margin-bottom: 25px;
-    }
-
+    /* Progress bars */
+    .progress-container { margin-top: 20px; }
+    .progress-step { margin-bottom: 20px; }
     .progress-step p {
       display: flex;
       justify-content: space-between;
       font-weight: 500;
-      font-size: 0.95rem;
-      margin-bottom: 8px;
+      font-size: 0.9rem;
+      margin-bottom: 6px;
       color: #555;
     }
 
     progress {
       width: 100%;
-      height: 14px;
+      height: 12px;
       appearance: none;
       border-radius: 10px;
       background-color: #e0e0e0;
       overflow: hidden;
     }
 
-    progress::-webkit-progress-bar {
-      background-color: #e0e0e0;
-      border-radius: 10px;
-    }
-
+    progress::-webkit-progress-bar { background-color: #e0e0e0; border-radius: 10px; }
     progress::-webkit-progress-value {
       background: linear-gradient(90deg, #f2c94c, #f2994a);
       border-radius: 10px;
       transition: width 0.3s ease;
     }
-
     progress::-moz-progress-bar {
       background: linear-gradient(90deg, #f2c94c, #f2994a);
       border-radius: 10px;
@@ -101,38 +87,32 @@
     }
 
     /* Depoimentos */
-    .testimonials {
-      margin-top: 40px;
-    }
-
+    .testimonials { margin-top: 30px; }
     .testimonial {
-      background: #fff7e6;
-      border-left: 5px solid #f2c94c;
-      padding: 16px;
-      margin-bottom: 16px;
+      background: rgba(255, 247, 230, 0.95); /* quase transparente */
+      border-left: 4px solid #f2c94c;
+      padding: 12px;
+      margin-bottom: 12px;
       border-radius: 10px;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       color: #444;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
       transition: transform 0.2s;
     }
-
-    .testimonial:hover {
-      transform: translateY(-2px);
-    }
-
+    .testimonial:hover { transform: translateY(-2px); }
     .testimonial strong {
       display: block;
-      margin-top: 8px;
+      margin-top: 6px;
       font-weight: 600;
       color: #222;
     }
 
     /* Responsividade */
     @media (max-width: 400px) {
-      h1 { font-size: 1.2rem; }
-      .progress-step p { font-size: 0.9rem; }
-      .testimonial { font-size: 0.9rem; padding: 14px; }
+      h1 { font-size: 1.1rem; }
+      .progress-step p { font-size: 0.85rem; }
+      .testimonial { font-size: 0.85rem; padding: 10px; }
+      progress { height: 10px; }
     }
   </style>
 </head>
